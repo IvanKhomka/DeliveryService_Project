@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: DeliveryService_Project
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gdansk_eats_db
+    username: postgres
+    password: docker
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+app:
+  jwt:
+    secret: ThisIsADemoSecretKeyForJwtSigningChangeMeInProd123456
+    expiration-ms: 86400000

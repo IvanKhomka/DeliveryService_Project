@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+
+
+    <changeSet id="01-insert-users-demo-data" author="ivakh" context="demo-data">
+        <insert tableName="users">
+            <column name="id" valueNumeric="1"/>
+            <column name="email" value="admin@dostawa-trojmiasto.pl"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 301"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="2"/>
+            <column name="email" value="katarzyna.nowak@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 302"/>
+            <column name="role" value="CLIENT"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="3"/>
+            <column name="email" value="michal.kowalski@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 303"/>
+            <column name="role" value="CLIENT"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="4"/>
+            <column name="email" value="agnieszka.wojcik@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 304"/>
+            <column name="role" value="CLIENT"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="5"/>
+            <column name="email" value="tomasz.zielinski@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 305"/>
+            <column name="role" value="RESTAURANT_OWNER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="6"/>
+            <column name="email" value="anna.szymanska@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 306"/>
+            <column name="role" value="RESTAURANT_OWNER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="7"/>
+            <column name="email" value="pawel.dabrowski@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 307"/>
+            <column name="role" value="RESTAURANT_OWNER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="8"/>
+            <column name="email" value="krzysztof.lewandowski@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 308"/>
+            <column name="role" value="COURIER"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" valueNumeric="9"/>
+            <column name="email" value="marcin.wisniewski@gmail.com"/>
+            <column name="password_hash" value="$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"/>
+            <column name="phone" value="+48 501 200 309"/>
+            <column name="role" value="COURIER"/>
+        </insert>
+    </changeSet>
+
+    <!-- ===================== addresses (Gdańsk / Gdynia / Sopot) ===================== -->
+    <changeSet id="02-insert-addresses-demo-data" author="ivakh" context="demo-data">
+        <!-- клиент из Гданьска -->
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="2"/>
+            <column name="city" value="Gdańsk"/>
+            <column name="street" value="Długa"/>
+            <column name="building" value="24"/>
+            <column name="apartment" value="5"/>
+            <column name="latitude" valueNumeric="54.3487"/>
+            <column name="longitude" valueNumeric="18.6531"/>
+        </insert>
+        <!-- клиент из Гдыни -->
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="2"/>
+            <column name="user_id" valueNumeric="3"/>
+            <column name="city" value="Gdynia"/>
+            <column name="street" value="Świętojańska"/>
+            <column name="building" value="45"/>
+            <column name="apartment" value="12"/>
+            <column name="latitude" valueNumeric="54.5175"/>
+            <column name="longitude" valueNumeric="18.5308"/>
+        </insert>
+        <!-- клиент из Сопота -->
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="3"/>
+            <column name="user_id" valueNumeric="4"/>
+            <column name="city" value="Sopot"/>
+            <column name="street" value="Kościuszki"/>
+            <column name="building" value="16"/>
+            <column name="apartment" value="3"/>
+            <column name="latitude" valueNumeric="54.4442"/>
+            <column name="longitude" valueNumeric="18.5589"/>
+        </insert>
+        <!-- адреса самих ресторанов (user_id не задан) -->
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="4"/>
+            <column name="city" value="Gdańsk"/>
+            <column name="street" value="Piwna"/>
+            <column name="building" value="5"/>
+            <column name="latitude" valueNumeric="54.3494"/>
+            <column name="longitude" valueNumeric="18.6540"/>
+        </insert>
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="5"/>
+            <column name="city" value="Gdynia"/>
+            <column name="street" value="10 Lutego"/>
+            <column name="building" value="22"/>
+            <column name="latitude" valueNumeric="54.5185"/>
+            <column name="longitude" valueNumeric="18.5320"/>
+        </insert>
+        <insert tableName="addresses">
+            <column name="id" valueNumeric="6"/>
+            <column name="city" value="Sopot"/>
+            <column name="street" value="Bohaterów Monte Cassino"/>
+            <column name="building" value="55"/>
+            <column name="latitude" valueNumeric="54.4413"/>
+            <column name="longitude" valueNumeric="18.5605"/>
+        </insert>
+    </changeSet>
+
+    <!-- ===================== restaurants ===================== -->
+    <changeSet id="03-insert-restaurants-demo-data" author="ivakh" context="demo-data">
+        <insert tableName="restaurants">
+            <column name="id" valueNumeric="1"/>
+            <column name="owner_id" valueNumeric="5"/>
+            <column name="address_id" valueNumeric="4"/>
+            <column name="name" value="Restauracja Neptun"/>
+        </insert>
+        <insert tableName="restaurants">
+            <column name="id" valueNumeric="2"/>
+            <column name="owner_id" valueNumeric="6"/>
+            <column name="address_id" valueNumeric="5"/>
+            <column name="name" value="Burger Port"/>
+        </insert>
+        <insert tableName="restaurants">
+            <column name="id" valueNumeric="3"/>
+            <column name="owner_id" valueNumeric="7"/>
+            <column name="address_id" valueNumeric="6"/>
+            <column name="name" value="Pizza Monciak"/>
+        </insert>
+    </changeSet>
+
+    <!-- ===================== dishes (ceny w PLN) ===================== -->
+    <changeSet id="04-insert-dishes-demo-data" author="ivakh" context="demo-data">
+        <!-- Restauracja Neptun (Gdańsk) — kuchnia polska -->
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="1"/>
+            <column name="restaurant_id" valueNumeric="1"/>
+            <column name="name" value="Pierogi ruskie"/>
+            <column name="price" valueNumeric="28.00"/>
+            <column name="description" value="Tradycyjne pierogi z ziemniakami, twarogiem i cebulką"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="2"/>
+            <column name="restaurant_id" valueNumeric="1"/>
+            <column name="name" value="Żurek staropolski"/>
+            <column name="price" valueNumeric="22.00"/>
+            <column name="description" value="Kwaśna zupa żytnia z białą kiełbasą i jajkiem"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="3"/>
+            <column name="restaurant_id" valueNumeric="1"/>
+            <column name="name" value="Kotlet schabowy z ziemniakami"/>
+            <column name="price" valueNumeric="34.00"/>
+            <column name="description" value="Panierowany kotlet wieprzowy z ziemniakami i surówką"/>
+        </insert>
+        <!-- Burger Port (Gdynia) -->
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="4"/>
+            <column name="restaurant_id" valueNumeric="2"/>
+            <column name="name" value="Cheeseburger"/>
+            <column name="price" valueNumeric="24.00"/>
+            <column name="description" value="Burger wołowy z serem cheddar"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="5"/>
+            <column name="restaurant_id" valueNumeric="2"/>
+            <column name="name" value="Podwójny burger"/>
+            <column name="price" valueNumeric="32.00"/>
+            <column name="description" value="Burger z podwójnym kotletem wołowym"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="6"/>
+            <column name="restaurant_id" valueNumeric="2"/>
+            <column name="name" value="Frytki belgijskie"/>
+            <column name="price" valueNumeric="14.00"/>
+            <column name="description" value="Grube frytki smażone dwukrotnie"/>
+        </insert>
+        <!-- Pizza Monciak (Sopot) -->
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="7"/>
+            <column name="restaurant_id" valueNumeric="3"/>
+            <column name="name" value="Pizza Margherita"/>
+            <column name="price" valueNumeric="34.00"/>
+            <column name="description" value="Klasyczna pizza z pomidorami i mozzarellą"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="8"/>
+            <column name="restaurant_id" valueNumeric="3"/>
+            <column name="name" value="Pizza Owoce Morza"/>
+            <column name="price" valueNumeric="46.00"/>
+            <column name="description" value="Pizza z krewetkami i kalmarami"/>
+        </insert>
+        <insert tableName="dishes">
+            <column name="id" valueNumeric="9"/>
+            <column name="restaurant_id" valueNumeric="3"/>
+            <column name="name" value="Sałatka Caprese"/>
+            <column name="price" valueNumeric="24.00"/>
+            <column name="description" value="Pomidory, mozzarella i bazylia"/>
+        </insert>
+    </changeSet>
+
+    <!-- ===================== orders ===================== -->
+    <changeSet id="05-insert-orders-demo-data" author="ivakh" context="demo-data">
+        <insert tableName="orders">
+            <column name="id" valueNumeric="1"/>
+            <column name="client_id" valueNumeric="2"/>
+            <column name="restaurant_id" valueNumeric="1"/>
+            <column name="courier_id" valueNumeric="8"/>
+            <column name="delivery_address_id" valueNumeric="1"/>
+            <column name="status" value="DELIVERED"/>
+            <column name="total_price" valueNumeric="50.00"/>
+            <column name="created_at" valueDate="2026-08-20T12:00:00"/>
+            <column name="updated_at" valueDate="2026-08-20T13:00:00"/>
+            <column name="delivered_at" valueDate="2026-08-20T13:00:00"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" valueNumeric="2"/>
+            <column name="client_id" valueNumeric="2"/>
+            <column name="restaurant_id" valueNumeric="1"/>
+            <column name="delivery_address_id" valueNumeric="1"/>
+            <column name="status" value="CONFIRMED"/>
+            <column name="total_price" valueNumeric="56.00"/>
+            <column name="created_at" valueDate="2026-08-25T17:00:00"/>
+            <column name="updated_at" valueDate="2026-08-25T17:15:00"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" valueNumeric="3"/>
+            <column name="client_id" valueNumeric="3"/>
+            <column name="restaurant_id" valueNumeric="2"/>
+            <column name="courier_id" valueNumeric="9"/>
+            <column name="delivery_address_id" valueNumeric="2"/>
+            <column name="status" value="ON_THE_WAY"/>
+            <column name="total_price" valueNumeric="62.00"/>
+            <column name="created_at" valueDate="2026-08-26T10:00:00"/>
+            <column name="updated_at" valueDate="2026-08-26T10:30:00"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" valueNumeric="4"/>
+            <column name="client_id" valueNumeric="3"/>
+            <column name="restaurant_id" valueNumeric="2"/>
+            <column name="courier_id" valueNumeric="8"/>
+            <column name="delivery_address_id" valueNumeric="2"/>
+            <column name="status" value="PREPARING"/>
+            <column name="total_price" valueNumeric="60.00"/>
+            <column name="created_at" valueDate="2026-08-26T09:00:00"/>
+            <column name="updated_at" valueDate="2026-08-26T09:20:00"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" valueNumeric="5"/>
+            <column name="client_id" valueNumeric="4"/>
+            <column name="restaurant_id" valueNumeric="3"/>
+            <column name="delivery_address_id" valueNumeric="3"/>
+            <column name="status" value="NEW"/>
+            <column name="total_price" valueNumeric="58.00"/>
+            <column name="created_at" valueDate="2026-08-26T11:15:00"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" valueNumeric="6"/>
+            <column name="client_id" valueNumeric="4"/>
+            <column name="restaurant_id" valueNumeric="3"/>
+            <column name="courier_id" valueNumeric="9"/>
+            <column name="delivery_address_id" valueNumeric="3"/>
+            <column name="status" value="CANCELLED"/>
+            <column name="total_price" valueNumeric="46.00"/>
+            <column name="created_at" valueDate="2026-08-22T19:00:00"/>
+            <column name="updated_at" valueDate="2026-08-22T19:30:00"/>
+        </insert>
+    </changeSet>
+
+    <!-- ===================== order_items ===================== -->
+    <changeSet id="06-insert-order-items-demo-data" author="ivakh" context="demo-data">
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="1"/>
+            <column name="order_id" valueNumeric="1"/>
+            <column name="dish_id" valueNumeric="1"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="28.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="2"/>
+            <column name="order_id" valueNumeric="1"/>
+            <column name="dish_id" valueNumeric="2"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="22.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="3"/>
+            <column name="order_id" valueNumeric="2"/>
+            <column name="dish_id" valueNumeric="3"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="34.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="4"/>
+            <column name="order_id" valueNumeric="2"/>
+            <column name="dish_id" valueNumeric="2"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="22.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="5"/>
+            <column name="order_id" valueNumeric="3"/>
+            <column name="dish_id" valueNumeric="4"/>
+            <column name="quantity" valueNumeric="2"/>
+            <column name="price_at_purchase" valueNumeric="24.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="6"/>
+            <column name="order_id" valueNumeric="3"/>
+            <column name="dish_id" valueNumeric="6"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="14.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="7"/>
+            <column name="order_id" valueNumeric="4"/>
+            <column name="dish_id" valueNumeric="5"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="32.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="8"/>
+            <column name="order_id" valueNumeric="4"/>
+            <column name="dish_id" valueNumeric="6"/>
+            <column name="quantity" valueNumeric="2"/>
+            <column name="price_at_purchase" valueNumeric="14.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="9"/>
+            <column name="order_id" valueNumeric="5"/>
+            <column name="dish_id" valueNumeric="7"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="34.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="10"/>
+            <column name="order_id" valueNumeric="5"/>
+            <column name="dish_id" valueNumeric="9"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="24.00"/>
+        </insert>
+        <insert tableName="order_items">
+            <column name="id" valueNumeric="11"/>
+            <column name="order_id" valueNumeric="6"/>
+            <column name="dish_id" valueNumeric="8"/>
+            <column name="quantity" valueNumeric="1"/>
+            <column name="price_at_purchase" valueNumeric="46.00"/>
+        </insert>
+    </changeSet>
+    <changeSet id="07-fix-postgresql-sequences-after-demo-data" author="ivakh" context="demo-data">
+        <sql dbms="postgresql">
+            SELECT setval(pg_get_serial_sequence('users', 'id'), COALESCE((SELECT MAX(id) FROM users), 1));
+            SELECT setval(pg_get_serial_sequence('addresses', 'id'), COALESCE((SELECT MAX(id) FROM addresses), 1));
+            SELECT setval(pg_get_serial_sequence('restaurants', 'id'), COALESCE((SELECT MAX(id) FROM restaurants), 1));
+            SELECT setval(pg_get_serial_sequence('dishes', 'id'), COALESCE((SELECT MAX(id) FROM dishes), 1));
+            SELECT setval(pg_get_serial_sequence('orders', 'id'), COALESCE((SELECT MAX(id) FROM orders), 1));
+            SELECT setval(pg_get_serial_sequence('order_items', 'id'), COALESCE((SELECT MAX(id) FROM order_items), 1));
+        </sql>
+    </changeSet>
+    <changeSet id="08-fix-demo-users-password-hash" author="ivakh" context="demo-data">
+        <update tableName="users">
+            <column name="password_hash" value="$2b$10$wfF0RhD8tJm1nGmQPnHniO0TNbfUeS/0v65pE3F7A0ssovtiyFZOO"/>
+            <where>id IN (1,2,3,4,5,6,7,8,9)</where>
+        </update>
+    </changeSet>
+
+</databaseChangeLog>

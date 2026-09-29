@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+
+    <!-- ===================== users ===================== -->
+    <changeSet id="01-create-users-table" author="ivakh">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uk_users_email"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(20)"/>
+            <column name="role" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- ===================== addresses ===================== -->
+    <changeSet id="02-create-addresses-table" author="ivakh">
+        <createTable tableName="addresses">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="city" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="building" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apartment" type="VARCHAR(20)"/>
+            <column name="latitude" type="DOUBLE"/>
+            <column name="longitude" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="02-add-fk-addresses-user_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="addresses"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_addresses_user"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <!-- ===================== restaurants ===================== -->
+    <changeSet id="03-create-restaurants-table" author="ivakh">
+        <createTable tableName="restaurants">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="owner_id" type="BIGINT"/>
+            <column name="address_id" type="BIGINT"/>
+            <column name="name" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-add-fk-restaurants-owner_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="restaurants"
+                                 baseColumnNames="owner_id"
+                                 constraintName="fk_restaurants_owner"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+
+    <changeSet id="03-add-fk-restaurants-address_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="restaurants"
+                                 baseColumnNames="address_id"
+                                 constraintName="fk_restaurants_address"
+                                 referencedTableName="addresses"
+                                 referencedColumnNames="id"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+
+    <!-- ===================== dishes ===================== -->
+    <changeSet id="04-create-dishes-table" author="ivakh">
+        <createTable tableName="dishes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="CLOB"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04-add-fk-dishes-restaurant_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="dishes"
+                                 baseColumnNames="restaurant_id"
+                                 constraintName="fk_dishes_restaurant"
+                                 referencedTableName="restaurants"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <!-- ===================== orders ===================== -->
+    <changeSet id="05-create-orders-table" author="ivakh">
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="courier_id" type="BIGINT"/>
+            <column name="delivery_address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="delivered_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="05-add-fk-orders-client_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="client_id"
+                                 constraintName="fk_orders_client"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="05-add-fk-orders-restaurant_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="restaurant_id"
+                                 constraintName="fk_orders_restaurant"
+                                 referencedTableName="restaurants"
+                                 referencedColumnNames="id"
+                                 onDelete="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="05-add-fk-orders-courier_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="courier_id"
+                                 constraintName="fk_orders_courier"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+
+    <changeSet id="05-add-fk-orders-delivery_address_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="delivery_address_id"
+                                 constraintName="fk_orders_delivery_address"
+                                 referencedTableName="addresses"
+                                 referencedColumnNames="id"
+                                 onDelete="RESTRICT"/>
+    </changeSet>
+
+    <!-- ===================== order_items ===================== -->
+    <changeSet id="06-create-order-items-table" author="ivakh">
+        <createTable tableName="order_items">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dish_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_at_purchase" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="06-add-fk-order-items-order_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="order_items"
+                                 baseColumnNames="order_id"
+                                 constraintName="fk_order_items_order"
+                                 referencedTableName="orders"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="06-add-fk-order-items-dish_id" author="ivakh">
+        <addForeignKeyConstraint baseTableName="order_items"
+                                 baseColumnNames="dish_id"
+                                 constraintName="fk_order_items_dish"
+                                 referencedTableName="dishes"
+                                 referencedColumnNames="id"
+                                 onDelete="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>
